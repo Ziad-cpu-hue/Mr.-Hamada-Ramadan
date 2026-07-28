@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تسجيل الدخول | أ. حمادة رمضان</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        @font-face {
+            font-family: 'Somar Sans';
+            src: url('https://fonts.cdnfonts.com/css/somar-sans'); /* Fallback logic for Somar Sans if hosted */
+        }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f8fafa;
+            overflow-x: hidden;
+        }
+        .font-somar {
+            font-family: 'Somar Sans', 'Tajawal', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-container": "#785a1a",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#00513d",
+                      "error": "#ba1a1a",
+                      "on-tertiary-fixed": "#002117",
+                      "excellence-gold": "#C5A059",
+                      "surface-variant": "#e1e3e3",
+                      "glass-fill": "rgba(255, 255, 255, 0.7)",
+                      "on-secondary-fixed-variant": "#5d4201",
+                      "on-background": "#191c1d",
+                      "tertiary": "#003628",
+                      "on-surface": "#191c1d",
+                      "tertiary-fixed-dim": "#72d9b6",
+                      "surface-dim": "#d8dada",
+                      "on-error": "#ffffff",
+                      "surface-container-low": "#f2f4f4",
+                      "background": "#f8fafa",
+                      "primary-fixed-dim": "#94d1d1",
+                      "tertiary-fixed": "#8ff6d1",
+                      "on-surface-variant": "#3f4848",
+                      "surface-container": "#eceeee",
+                      "secondary-fixed": "#ffdea5",
+                      "outline-variant": "#bfc8c8",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "inverse-on-surface": "#eff1f1",
+                      "deep-teal": "#004D4D",
+                      "secondary-fixed-dim": "#e9c176",
+                      "inverse-primary": "#94d1d1",
+                      "secondary": "#775a19",
+                      "secondary-container": "#fed488",
+                      "primary-fixed": "#b0eeed",
+                      "surface-tint": "#296767",
+                      "on-secondary-fixed": "#261900",
+                      "on-primary-fixed": "#002020",
+                      "surface-container-high": "#e6e8e9",
+                      "surface-container-highest": "#e1e3e3",
+                      "mint-accent": "#66CDAA",
+                      "primary-container": "#004d4d",
+                      "surface-bright": "#f8fafa",
+                      "on-tertiary-container": "#5dc5a2",
+                      "outline": "#6f7978",
+                      "on-primary-container": "#80bdbc",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed-variant": "#044f4f",
+                      "surface": "#f8fafa",
+                      "primary": "#003434",
+                      "surface-white": "#FFFFFF",
+                      "inverse-surface": "#2e3131",
+                      "tertiary-container": "#004f3c"
+              },
+              "fontFamily": {
+                      "headline-md": ["Somar Sans", "Tajawal"],
+                      "body-lg": ["Tajawal"],
+                      "label-bold": ["Tajawal"],
+                      "headline-lg": ["Somar Sans", "Tajawal"],
+                      "body-md": ["Tajawal"],
+                      "headline-lg-mobile": ["Somar Sans", "Tajawal"],
+                      "caption": ["Tajawal"]
+              },
+              "fontSize": {
+                      "headline-md": ["32px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "1.8", "fontWeight": "400"}],
+                      "label-bold": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "headline-lg": ["48px", {"lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-md": ["16px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["32px", {"lineHeight": "1.3", "fontWeight": "800"}],
+                      "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex items-center justify-center p-4">
+<!-- Ambient Background Elements -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none">
+<div class="absolute -top-[10%] -right-[5%] w-[40%] h-[40%] bg-mint-accent/10 rounded-full blur-[120px]"></div>
+<div class="absolute -bottom-[10%] -left-[5%] w-[40%] h-[40%] bg-excellence-gold/10 rounded-full blur-[120px]"></div>
+
+</div>
+<!-- Main Container -->
+<main class="relative z-10 w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 bg-surface-white rounded-[32px] overflow-hidden shadow-[0_20px_80px_rgba(0,77,77,0.12)]">
+<!-- Right Side: Decorative/Information -->
+<div class="hidden lg:flex flex-col justify-between p-12 relative bg-deep-teal text-white overflow-hidden">
+<!-- Animated Background Pattern -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<div class="absolute top-0 right-0 w-full h-full" style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.2) 1px, transparent 0); background-size: 40px 40px;"></div>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-12">
+<div class="w-12 h-12 bg-excellence-gold rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl">school</span>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-white tracking-tight">حمادة رمضان</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg mb-6 leading-tight">
+                    مرحباً بك مجدداً في <span class="text-excellence-gold">رحلة المعرفة</span>
+</h1>
+<p class="font-body-lg text-body-lg text-surface-variant max-w-md">
+                    سجل دخولك لتتمكن من الوصول إلى كافة دروس الدراسات الاجتماعية، الاختبارات التفاعلية، ومتابعة تقدمك الدراسي مع الأستاذ حمادة رمضان.
+                </p>
+</div>
+<div class="relative z-10">
+<div class="glass-panel p-6 rounded-2xl border-white/10 flex items-center gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-excellence-gold">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a middle-aged Arabic teacher with a warm, confident smile. He is wearing a sharp charcoal suit over a crisp white shirt, standing against a soft-focus library background. The lighting is bright and airy, with warm golden highlights reflecting the excellence gold brand color. The overall atmosphere is educational, authoritative, and welcoming." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbQy6PtvXYrcI_kuNdJKLAu-_heDjEqueXSEohp4ODhM3fLX9RgdFP8-5pZpIX8629he0A8jfPIQ97LtbQNJJ3_hpeX-SCTc8E--0VeQacV98tPg8XSEm3e3bo5On3pjXb9YcRD8oYJSiySHv-CEOipZTOlEu1vYds3XdLCaeMWbKGxsXVOYcagnUHo_VBnsLqPNafx3BXITcZqjuXvzQHtOt7V4vNoZpI3QHLzo2mUo1N9gqvI9YXWKeeG61mbOgiPS03NWD49cCi"/>
+</div>
+<div>
+<p class="font-label-bold text-label-bold text-white">أ. حمادة رمضان</p>
+<p class="font-caption text-caption text-surface-variant">معلم خبير الدراسات الاجتماعية</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Left Side: Login Form -->
+<div class="p-8 md:p-16 lg:p-20 flex flex-col justify-center">
+<div class="mb-10 text-center lg:text-right">
+<h2 class="font-headline-md text-headline-md text-deep-teal mb-2">تسجيل الدخول</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">أدخل بياناتك للبدء في التعلم</p>
+</div>
+<form action="/login/" method="POST" class="space-y-6">
+{% csrf_token %}
+{% if messages %}
+{% for message in messages %}
+<div class="p-4 rounded-xl bg-error-container text-on-error-container font-body-md text-body-md text-center">{{ message }}</div>
+{% endfor %}
+{% endif %}
+<!-- Phone Number -->
+<div class="space-y-2">
+<label class="block font-label-bold text-label-bold text-deep-teal" for="phone">رقم الهاتف</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-deep-teal transition-colors">phone</span>
+<input class="w-full h-14 pr-12 pl-4 bg-surface-container-low border border-transparent rounded-xl focus:bg-white focus:border-deep-teal focus:ring-0 transition-all font-body-md text-body-md placeholder:text-outline-variant" id="phone" name="parent_phone_number" placeholder="01xxxxxxxxx" type="tel"/>
+</div>
+</div>
+<!-- Password -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="block font-label-bold text-label-bold text-deep-teal" for="password">كلمة المرور</label>
+<a class="font-caption text-caption text-excellence-gold hover:underline transition-all" href="#">نسيت كلمة المرور؟</a>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-deep-teal transition-colors">lock</span>
+<input class="w-full h-14 pr-12 pl-12 bg-surface-container-low border border-transparent rounded-xl focus:bg-white focus:border-deep-teal focus:ring-0 transition-all font-body-md text-body-md placeholder:text-outline-variant" id="password" name="password" placeholder="••••••••" type="password"/>
+<button class="absolute left-4 top-1/2 -translate-y-1/2 text-outline hover:text-deep-teal transition-colors" onclick="togglePassword()" type="button">
+<span class="material-symbols-outlined" id="eye-icon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center gap-3">
+<input class="w-5 h-5 rounded border-outline-variant text-deep-teal focus:ring-deep-teal" id="remember" type="checkbox"/>
+<label class="font-body-md text-body-md text-on-surface-variant cursor-pointer" for="remember">تذكرني على هذا الجهاز</label>
+</div>
+<!-- Submit Button -->
+<button class="w-full h-14 bg-deep-teal text-white rounded-xl font-label-bold text-body-md flex items-center justify-center gap-2 hover:bg-primary-container hover:shadow-[0_8px_30px_rgba(0,77,77,0.3)] active:scale-[0.98] transition-all group" type="submit">
+<span>تسجيل الدخول</span>
+<span class="material-symbols-outlined group-hover:translate-x-[-4px] transition-transform">arrow_back</span>
+</button>
+</form>
+<!-- Secondary Actions -->
+<div class="mt-12 text-center border-t border-outline-variant/20 pt-8">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    ليس لديك حساب؟ 
+                    <a class="font-label-bold text-excellence-gold hover:text-on-secondary-container transition-colors" href="/register/">سجل الآن</a>
+</p>
+<!-- Social Login Alternative (Optional but UI enrichment) -->
+<div class="mt-8">
+<p class="font-caption text-caption text-outline mb-4 relative before:content-[''] before:absolute before:right-0 before:top-1/2 before:w-[35%] before:h-[1px] before:bg-outline-variant after:content-[''] after:absolute after:left-0 after:top-1/2 after:w-[35%] after:h-[1px] after:bg-outline-variant">
+                        أو الدخول عبر
+                    </p>
+<div class="flex justify-center gap-4">
+<button class="w-14 h-14 rounded-xl border border-outline-variant flex items-center justify-center hover:bg-surface-container-low transition-all">
+<svg class="w-6 h-6" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+</button>
+<button class="w-14 h-14 rounded-xl border border-outline-variant flex items-center justify-center hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-blue-600">qr_code_2</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Credit -->
+<footer class="fixed bottom-6 left-0 right-0 text-center pointer-events-none">
+<p class="font-caption text-caption text-outline-variant">جميع الحقوق محفوظة للأستاذ حمادة رمضان © 2024</p>
+</footer>
+<script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eye-icon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.textContent = 'visibility_off';
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.textContent = 'visibility';
+            }
+        }
+
+        // Simple subtle entrance animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('main');
+            main.style.opacity = '0';
+            main.style.transform = 'translateY(20px)';
+            main.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+            
+            setTimeout(() => {
+                main.style.opacity = '1';
+                main.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body></html>
