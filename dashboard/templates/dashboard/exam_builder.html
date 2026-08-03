@@ -1,0 +1,192 @@
+{% extends "dashboard/base.html" %}
+{% block title %}{% if is_edit %}تعديل امتحان{% else %}امتحان جديد{% endif %}{% endblock %}
+{% block content %}
+
+<div class="dash-topbar">
+  <div>
+    <h1>{% if is_edit %}✏️ تعديل الامتحان{% else %}📝 امتحان جديد{% endif %}</h1>
+    <div class="subtitle">أضف بيانات الامتحان وكل أسئلته من نفس الصفحة، واحفظ مرة واحدة بس</div>
+  </div>
+  <a class="btn btn-outline" href="{% url 'dashboard:list' 'exams' %}">← رجوع لقائمة الامتحانات</a>
+</div>
+
+<form method="post" enctype="multipart/form-data" id="examBuilderForm" novalidate>
+  {% csrf_token %}
+
+  <div class="panel">
+    {% if exam_form.non_field_errors %}
+      <ul class="errorlist" style="margin-bottom:16px;">
+        {% for e in exam_form.non_field_errors %}<li>{{ e }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+    <h2>📋 بيانات الامتحان</h2>
+    <div class="form-grid">
+      {% for field in exam_form %}
+        <div class="form-field {% if field.field.widget.input_type == 'textarea' or field.html_name == 'description' %}full{% endif %}">
+          <label for="{{ field.id_for_label }}">
+            {{ field.label }} {% if field.field.required %}<span class="required">*</span>{% endif %}
+          </label>
+          {{ field }}
+          {% if field.errors %}<ul class="errorlist">{% for e in field.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="panel">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+      <h2 style="margin:0;">❓ أسئلة الامتحان</h2>
+      <button type="button" class="btn btn-primary btn-sm" onclick="addQuestion()">➕ إضافة سؤال</button>
+    </div>
+
+    <div id="questionsContainer">
+      {% for question in existing_questions %}
+        <div class="question-block">
+          <div class="question-block-header">
+            <strong>سؤال {{ forloop.counter }}</strong>
+            <button type="button" class="btn btn-danger btn-sm" onclick="this.closest('.question-block').remove()">🗑️ حذف السؤال</button>
+          </div>
+          <div class="form-grid">
+            <div class="form-field">
+              <label>نوع السؤال</label>
+              <select class="q-type-select" onchange="toggleChoicesVisibility(this)">
+                <option value="mcq" {% if question.question_type == 'mcq' %}selected{% endif %}>اختياري</option>
+                <option value="essay" {% if question.question_type == 'essay' %}selected{% endif %}>مقالي</option>
+              </select>
+            </div>
+            <div class="form-field full">
+              <label>نص السؤال</label>
+              <textarea class="q-text-input" rows="2">{{ question.text }}</textarea>
+            </div>
+            <div class="form-field full">
+              <label>صورة السؤال (اختياري) {% if question.image %}— يوجد صورة مرفوعة بالفعل، اختر صورة جديدة فقط لو عايز تستبدلها{% endif %}</label>
+              <input type="file" class="q-image-input" accept="image/*">
+            </div>
+          </div>
+          <div class="choices-container" style="{% if question.question_type != 'mcq' %}display:none;{% endif %}">
+            <div class="choices-list">
+              {% for choice in question.choices.all %}
+                <div class="choice-row">
+                  <input type="radio" class="choice-correct-radio" {% if choice.is_correct %}checked{% endif %}>
+                  <input type="text" class="choice-text-input" value="{{ choice.text }}" placeholder="نص الاختيار">
+                  <button type="button" class="btn btn-danger btn-sm" onclick="this.closest('.choice-row').remove()">✕</button>
+                </div>
+              {% endfor %}
+            </div>
+            <button type="button" class="btn btn-outline btn-sm" onclick="addChoice(this)">➕ إضافة اختيار</button>
+            <input type="hidden" class="choice-count-input" value="0">
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div id="emptyQuestionsHint" class="empty-state" {% if existing_questions %}style="display:none;"{% endif %}>
+      <div class="emoji">📭</div>
+      لسه معملتش أي سؤال. دوس "➕ إضافة سؤال" فوق عشان تبدأ.
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">💾 حفظ الامتحان بكل أسئلته</button>
+    <a class="btn btn-outline" href="{% url 'dashboard:list' 'exams' %}">إلغاء</a>
+  </div>
+
+  <input type="hidden" name="question_count" id="questionCountInput" value="0">
+</form>
+
+<!-- قالب سؤال جديد فاضي (يُستخدم لإضافة أسئلة بالـ JS) -->
+<template id="questionTemplate">
+  <div class="question-block">
+    <div class="question-block-header">
+      <strong>سؤال جديد</strong>
+      <button type="button" class="btn btn-danger btn-sm" onclick="this.closest('.question-block').remove()">🗑️ حذف السؤال</button>
+    </div>
+    <div class="form-grid">
+      <div class="form-field">
+        <label>نوع السؤال</label>
+        <select class="q-type-select" onchange="toggleChoicesVisibility(this)">
+          <option value="mcq" selected>اختياري</option>
+          <option value="essay">مقالي</option>
+        </select>
+      </div>
+      <div class="form-field full">
+        <label>نص السؤال</label>
+        <textarea class="q-text-input" rows="2"></textarea>
+      </div>
+      <div class="form-field full">
+        <label>صورة السؤال (اختياري)</label>
+        <input type="file" class="q-image-input" accept="image/*">
+      </div>
+    </div>
+    <div class="choices-container">
+      <div class="choices-list"></div>
+      <button type="button" class="btn btn-outline btn-sm" onclick="addChoice(this)">➕ إضافة اختيار</button>
+      <input type="hidden" class="choice-count-input" value="0">
+    </div>
+  </div>
+</template>
+
+<!-- قالب اختيار جديد فاضي -->
+<template id="choiceTemplate">
+  <div class="choice-row">
+    <input type="radio" class="choice-correct-radio">
+    <input type="text" class="choice-text-input" placeholder="نص الاختيار">
+    <button type="button" class="btn btn-danger btn-sm" onclick="this.closest('.choice-row').remove()">✕</button>
+  </div>
+</template>
+
+<script>
+  function toggleChoicesVisibility(select) {
+    const block = select.closest('.question-block');
+    const container = block.querySelector('.choices-container');
+    container.style.display = (select.value === 'mcq') ? '' : 'none';
+  }
+
+  function addChoice(addBtn) {
+    const container = addBtn.closest('.choices-container');
+    const list = container.querySelector('.choices-list');
+    const tpl = document.getElementById('choiceTemplate');
+    const clone = tpl.content.cloneNode(true);
+    list.appendChild(clone);
+  }
+
+  function addQuestion() {
+    const container = document.getElementById('questionsContainer');
+    const tpl = document.getElementById('questionTemplate');
+    const clone = tpl.content.cloneNode(true);
+    container.appendChild(clone);
+
+    // ضيف اختيارين فاضيين كبداية للسؤال الجديد
+    const lastBlock = container.querySelector('.question-block:last-child');
+    const addChoiceBtn = lastBlock.querySelector('.choices-container > .btn-outline');
+    addChoice(addChoiceBtn);
+    addChoice(addChoiceBtn);
+
+    document.getElementById('emptyQuestionsHint').style.display = 'none';
+  }
+
+  // إعادة ترقيم كل الحقول قبل الإرسال عشان تتوافق مع اللي الباك إند مستنيه
+  document.getElementById('examBuilderForm').addEventListener('submit', function () {
+    const questionBlocks = Array.from(document.querySelectorAll('#questionsContainer .question-block'));
+
+    questionBlocks.forEach(function (qBlock, qi) {
+      qBlock.querySelector('.q-type-select').name = 'question_type_' + qi;
+      qBlock.querySelector('.q-text-input').name = 'question_text_' + qi;
+      qBlock.querySelector('.q-image-input').name = 'question_image_' + qi;
+
+      const choiceRows = Array.from(qBlock.querySelectorAll('.choice-row'));
+      choiceRows.forEach(function (cRow, ci) {
+        cRow.querySelector('.choice-text-input').name = 'choice_text_' + qi + '_' + ci;
+        const radio = cRow.querySelector('.choice-correct-radio');
+        radio.name = 'choice_correct_' + qi;
+        radio.value = ci;
+      });
+
+      qBlock.querySelector('.choice-count-input').name = 'choice_count_' + qi;
+      qBlock.querySelector('.choice-count-input').value = choiceRows.length;
+    });
+
+    document.getElementById('questionCountInput').value = questionBlocks.length;
+  });
+</script>
+{% endblock %}
